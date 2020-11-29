@@ -15,10 +15,10 @@ app.use(function (error, request, response, next) {
 });
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "eggboardDB",
+  host: "us-cdbr-east-02.cleardb.com",
+  user: "b7b9992404b96d",
+  password: "0178d97f",
+  database: "heroku_620aa052fdc6f48",
 });
 
 db.connect((err) => {
