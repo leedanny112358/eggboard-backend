@@ -14,14 +14,14 @@ app.use(function (error, request, response, next) {
   // Optionally log the request options so you can analyze it later.
 });
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: "us-cdbr-east-02.cleardb.com",
   user: "b7b9992404b96d",
   password: "0178d97f",
   database: "heroku_620aa052fdc6f48",
 });
 
-db.connect((err) => {
+db.getConnection((err) => {
   if (err) {
     throw err;
   }
@@ -37,7 +37,7 @@ db.connect((err) => {
 app.post("/newpost", (req, res) => {
   let post = req.body;
   let sql = "INSERT INTO posts SET ?";
-  db.query(sql, post, (err, result, next) => {
+  db.query(sql, post, (err, result) => {
     if (err) {
       res.status("400").send(err.sqlMessage);
     } else {
