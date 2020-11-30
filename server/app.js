@@ -18,11 +18,15 @@ const db = mysql.createConnection({
   host: "us-cdbr-east-02.cleardb.com",
   user: "b7b9992404b96d",
   password: "0178d97f",
+<<<<<<< HEAD
   database: "eggboardDB",
   // REMOTE DB //
   //Username: b7b9992404b96d
   //Password: 0178d97f
   //HostName: us-cdbr-east-02.cleardb.com
+=======
+  database: "heroku_620aa052fdc6f48",
+>>>>>>> b2f6745cc2b662e04a637cc6a15302505e671fb7
 });
 
 db.connect((err) => {
