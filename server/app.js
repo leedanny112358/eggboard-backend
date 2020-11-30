@@ -33,6 +33,7 @@ db.connect((err) => {
   throw new Error("BROKEN"); // Express will catch this on its own.
 }); */
 
+// new post
 app.post("/newpost", (req, res) => {
   let post = req.body;
   let sql = "INSERT INTO posts SET ?";
@@ -46,11 +47,21 @@ app.post("/newpost", (req, res) => {
   });
 });
 
+// get all posts
 app.get("/posts", (req, res) => {
   let sql = "SELECT * FROM posts";
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.send(results);
+  });
+});
+
+// delete post 
+app.get('/deletepost/:id', (req,res) => {
+  let sql = `DELETE FROM posts WHERE id = ${req.params.id}`;
+  let query = db.query(sql, post, (err, result) => {
+      if (err) throw err;
+      res.send('Post deleted');
   });
 });
 
