@@ -15,10 +15,14 @@ app.use(function (error, request, response, next) {
 });
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "password",
+  host: "us-cdbr-east-02.cleardb.com",
+  user: "b7b9992404b96d",
+  password: "0178d97f",
   database: "eggboardDB",
+  // REMOTE DB //
+  //Username: b7b9992404b96d
+  //Password: 0178d97f
+  //HostName: us-cdbr-east-02.cleardb.com
 });
 
 db.connect((err) => {
@@ -36,7 +40,7 @@ db.connect((err) => {
 app.post("/newpost", (req, res) => {
   let post = req.body;
   let sql = "INSERT INTO posts SET ?";
-  db.query(sql, post, (err, result, next) => {
+  db.query(sql, post, (err, result) => {
     if (err) {
       res.status("400").send(err.sqlMessage);
     } else {
