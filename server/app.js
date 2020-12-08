@@ -57,8 +57,8 @@ app.get("/posts", (req, res) => {
 });
 
 // delete post 
-app.get('/deletepost/:id', (req,res) => {
-  let sql = `DELETE FROM posts WHERE passcode = ${req.params.id}`;
+app.get('/deletepost/:id/:passcode', (req,res) => {
+  let sql = `DELETE FROM posts WHERE id = ${req.params.id} AND passcode = ${req.params.passcode}`;
   let query = db.query(sql, post, (err, result) => {
       if (err) throw err;
       res.send('Post deleted');
@@ -69,4 +69,3 @@ app.listen(process.env.PORT || "5000", () => {
   console.log(`listening on port:  ${process.env.PORT || "5000"}`);
 });
 
-// SELECT * FROM posts WHERE FIND_IN_SET('input', tag1)>0; 
