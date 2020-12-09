@@ -40,9 +40,9 @@ app.post("/newpost", (req, res) => {
   db.query(sql, post, (err, result) => {
     if (err) {
       res.status("400").send(err.sqlMessage);
+      console.log(err.sqlMessage);
     } else {
-      console.log(result);
-      res.send("success in adding post");
+      res.send("New post created");
     }
   });
 });
@@ -56,16 +56,15 @@ app.get("/posts", (req, res) => {
   });
 });
 
-// delete post 
-app.get('/deletepost/:id/:passcode', (req,res) => {
+// delete post
+app.get("/deletepost/:id/:passcode", (req, res) => {
   let sql = `DELETE FROM posts WHERE id = ${req.params.id} AND passcode = ${req.params.passcode}`;
   let query = db.query(sql, post, (err, result) => {
-      if (err) throw err;
-      res.send('Post deleted');
+    if (err) throw err;
+    res.send("Post deleted");
   });
 });
 
 app.listen(process.env.PORT || "5000", () => {
   console.log(`listening on port:  ${process.env.PORT || "5000"}`);
 });
-
