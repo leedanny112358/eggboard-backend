@@ -59,9 +59,15 @@ app.get("/posts", (req, res) => {
 // delete post
 app.get("/deletepost/:id/:passcode", (req, res) => {
   let sql = `DELETE FROM posts WHERE id = ${req.params.id} AND passcode = ${req.params.passcode}`;
-  let query = db.query(sql, post, (err, result) => {
-    if (err) throw err;
-    res.send("Post deleted");
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err.sqlMessage);
+      res.status("400").send(err.sqlMessage);
+    } else if (result.affectedRows > 0) {
+      res.status("200").send("Post deleted");
+    } else {
+      res.status("400").send("You have the wrong passcode");
+    }
   });
 });
 
