@@ -60,7 +60,10 @@ app.get("/posts", (req, res) => {
 // if GET to /filter?tag1=Java&tag2=Frontend&tag3=Open%20source
 // then req.query = {tag1: "Java", tag2: "Frontend", tag3: "Open source"}
 app.get("/filter", (req,res) => {
-  let sql = `SELECT * FROM posts WHERE tag1 = ${req.query.tag1} OR tag2 = ${req.query.tag2} OR tag3 = ${req.query.tag3}`;
+  let tag1 = req.query.tag1;
+  let tag2 = req.query.tag2.replace(/%20/g, ' ');
+  let tag3 = req.query.tag3.replace(/%20/g, ' ');
+  let sql = `SELECT * FROM posts WHERE tag1 = ${tag1} OR tag2 = ${tag2} OR tag3 = ${tag3}`;
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.send(results);
